@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% import "bootstrap/form.html" as wtf %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row mt-5 mb-3">
+        <div class="col-md-12">
+            <div class="float-left">
+                <h1 class="mb-0">{{dest.name}}</h1>
+                <p>Popular Destination</p>
+            </div>
+
+            <div class="float-right text-right">
+                <p class="mb-0">1 AUD equals</p>
+                <h2 id="exchange-rate">{{dest.currency}}</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Destination -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card my-3">
+                <div class="card-body">
+                    <div class="media">
+                        <img class="align-self-start mr-3"
+                            src="https://media-cdn.tripadvisor.com/media/photo-w/06/64/e9/88/roma.jpg" alt="Rome, Italy"
+                            style="max-width: 250px;">
+                        <div class="media-body">
+                            <small class="font-weight-bold text-muted">Stay 2 nights</small>
+                            <h5 class="mt-0">{{dest.name}}</h5>
+                            <p>{{dest.description}}</p>
+                            <a href="#" class="btn btn-danger">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <hr>
+
+    <!-- Comments -->
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Comments</h1>
+        </div>
+    </div>
+    {{wtf.render_form(form,"/destinations/{0}/comment".format(1))}}
+    {% for comments in dest.comment %}
+    <div class="row border-bottom">
+        <div class="col-md-12">
+            <b>{{comments.user}} <span class="ml-2 text-muted">January 2017</span></b>
+            <p>{{comments.text}}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
